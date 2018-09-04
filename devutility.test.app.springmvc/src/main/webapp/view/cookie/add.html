@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>add cookie - /view/cookie/add.html</title>
+<script type="text/javascript" src="/content/scripts/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<h3>add cookie</h3>
+	<div>
+		<form action="/cookie/add" method="post">
+			<p>
+				<label>name:</label> <input id="name" name="name" type="text" value="">
+			</p>
+			<p>
+				<label>value:</label> <input id="value" name="value" type="text" value="">
+			</p>
+			<p>
+				<input id="btn-add" type="button" value="add">
+			</p>
+		</form>
+	</div>
+	<script type="text/javascript">
+		$('#btn-add').click(function() {
+			var data = {
+				name : $('#name').val(),
+				value : $('#value').val()
+			};
+
+			$.getJSON('/cookie/add', data, function(result) {
+				console.log(result);
+			});
+		});
+	</script>
+</body>
+</html>

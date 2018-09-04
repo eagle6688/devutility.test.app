@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>upload - /view/fileupload/upload1.html</title>
+</head>
+
+<body>
+    <h3>Upload file</h3>
+    <form id="fileForm" action="/file/upload1" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td>
+                    <input id="name" name="name" type="text">
+                </td>
+            </tr>
+            <tr>
+                <td>Please select file:</td>
+                <td>
+                    <input type="file" name="file">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="upload">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
