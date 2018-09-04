@@ -9,9 +9,21 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
+	<dependencies>
+		<!-- devutility -->
+		<dependency>
+			<groupId>com.github.eagle6688</groupId>
+			<artifactId>devutility.internal</artifactId>
+			<version>1.1.17</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.eagle6688</groupId>
+			<artifactId>devutility.test.model</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<!-- devutility end -->
+	</dependencies>
 	<modules>
-		<module>devutility.test.app.springmvc</module>
-		<module>devutility.test.app.web</module>
 		<module>devutility.test.app.springboot</module>
 	</modules>
 </project>
