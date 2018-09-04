@@ -6,6 +6,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>devutility.test.app.springmvc</artifactId>
+	<packaging>war</packaging>
 	<dependencies>
 		<!-- Spring MVC -->
 		<dependency>
@@ -26,13 +27,6 @@
 		</dependency>
 		<!-- Spring MVC end -->
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.1</version>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- Validation -->
 		<dependency>
 			<groupId>javax.validation</groupId>
@@ -48,6 +42,13 @@
 			<version>2.9.6</version>
 		</dependency>
 		<!-- Jackson Json end -->
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>devutility.test.app.springmvc</finalName>
