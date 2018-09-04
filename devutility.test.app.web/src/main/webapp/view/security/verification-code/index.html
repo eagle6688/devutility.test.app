@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="/devutility.test.webapp/view/security/verification-code" />
+<title>Verification Code</title>
+</head>
+<body>
+	<div>
+		<img id="image" src="/devutility.test.webapp/servlet/security/VerificationCode?d=6&w=100&h=30" width="100" height="30" />
+	</div>
+	<script type="text/javascript">
+		document.getElementById('image').onclick = function() {
+			this.src = '/devutility.test.webapp/servlet/security/VerificationCode?d=6&w=100&h=30&t='
+					+ new Date().getTime();
+		};
+	</script>
+</body>
+</html>

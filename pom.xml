@@ -32,5 +32,6 @@
 	<modules>
 		<module>devutility.test.app.springboot</module>
 		<module>devutility.test.app.springmvc</module>
+		<module>devutility.test.app.web</module>
 	</modules>
 </project>
