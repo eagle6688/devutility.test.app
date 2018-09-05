@@ -28,6 +28,11 @@
 			<version>0.0.1</version>
 		</dependency>
 		<!-- devutility end -->
+		<dependency>
+			<groupId>com.lmax</groupId>
+			<artifactId>disruptor</artifactId>
+			<version>3.4.2</version>
+		</dependency>
 	</dependencies>
 	<modules>
 		<module>devutility.test.app.springboot</module>
