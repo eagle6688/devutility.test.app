@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="trace">
+<Configuration status="WARN">
 	<Properties>
-		<Property name="baseDir">/duta_springboot_logs</Property>
+		<Property name="baseDir">duta_springboot_logs</Property>
 		<Property name="message-pattern">[%d{HH:mm:ss:SSS}] [%t] %-5level %logger{36} - %msg%n</Property>
 	</Properties>
 	<Appenders>
@@ -21,7 +21,7 @@
 		</RollingRandomAccessFile>
 	</Appenders>
 	<Loggers>
-		<asyncRoot level="trace">
+		<asyncRoot level="DEBUG">
 			<AppenderRef ref="Console" />
 			<AppenderRef ref="RollingRandomAccessFile" />
 		</asyncRoot>
