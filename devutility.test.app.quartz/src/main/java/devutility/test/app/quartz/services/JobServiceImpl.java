@@ -23,7 +23,6 @@ public class JobServiceImpl implements JobService {
 		String triggerName = String.format("trigger_%s", name);
 		CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0/3 * * * * ?");
 		Trigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerName, group).withSchedule(scheduleBuilder).build();
-
 		schedulerFactory2.scheduleJob(jobDetail, trigger);
 	}
 }
