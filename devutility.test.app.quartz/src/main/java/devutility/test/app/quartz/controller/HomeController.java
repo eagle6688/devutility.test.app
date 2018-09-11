@@ -15,7 +15,6 @@ public class HomeController {
 	@Autowired
 	private JobService jobService;
 
-	@SuppressWarnings("unchecked")
 	@RequestMapping("/job")
 	public OperationResult job(String name) {
 		OperationResult result = new OperationResult();
@@ -23,12 +22,17 @@ public class HomeController {
 
 		try {
 			Class<?> clazz = Class.forName(String.format("devutility.test.app.quartz.jobs.%s", name));
-			jobService.start(name, "group1", (Class<Job>) clazz);
+
+			@SuppressWarnings("unchecked")
+			Class<Job> jobClazz = (Class<Job>) clazz;
+
+			jobService.start(name, "group1", jobClazz);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			result.setErrorMessage("Class not found!");
 		} catch (SchedulerException e) {
 			e.printStackTrace();
+			result.setErrorMessage("System error!");
 		}
 
 		return result;
