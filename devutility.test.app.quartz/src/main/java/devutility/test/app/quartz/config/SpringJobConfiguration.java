@@ -8,15 +8,17 @@ import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
+import devutility.test.app.quartz.jobs.SpringJobs;
+
 @Configuration
 public class SpringJobConfiguration {
 	@Bean
-	public MethodInvokingJobDetailFactoryBean jobDetailFactory1(JobsConfiguration jobsConfiguration) {
+	public MethodInvokingJobDetailFactoryBean jobDetailFactory1(SpringJobs springJobs) {
 		MethodInvokingJobDetailFactoryBean jobDetailFactory = new MethodInvokingJobDetailFactoryBean();
 		jobDetailFactory.setName("Spring-Job1");
 		jobDetailFactory.setGroup("Spring-Group");
 
-		jobDetailFactory.setTargetObject(jobsConfiguration);
+		jobDetailFactory.setTargetObject(springJobs);
 		jobDetailFactory.setTargetMethod("job1");
 
 		jobDetailFactory.setConcurrent(false);
@@ -33,12 +35,12 @@ public class SpringJobConfiguration {
 	}
 
 	@Bean
-	public MethodInvokingJobDetailFactoryBean jobDetailFactory2(JobsConfiguration jobsConfiguration) {
+	public MethodInvokingJobDetailFactoryBean jobDetailFactory2(SpringJobs springJobs) {
 		MethodInvokingJobDetailFactoryBean jobDetailFactory = new MethodInvokingJobDetailFactoryBean();
 		jobDetailFactory.setName("Spring-Job2");
 		jobDetailFactory.setGroup("Spring-Group");
 
-		jobDetailFactory.setTargetObject(jobsConfiguration);
+		jobDetailFactory.setTargetObject(springJobs);
 		jobDetailFactory.setTargetMethod("job2");
 
 		jobDetailFactory.setConcurrent(true);
