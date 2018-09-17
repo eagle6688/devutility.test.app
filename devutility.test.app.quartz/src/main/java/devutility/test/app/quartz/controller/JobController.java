@@ -10,13 +10,13 @@ import devutility.internal.models.OperationResult;
 import devutility.test.app.quartz.services.JobService;
 
 @RestController
-@RequestMapping("/home")
-public class HomeController {
+@RequestMapping("/job")
+public class JobController {
 	@Autowired
 	private JobService jobService;
 
-	@RequestMapping("/job")
-	public OperationResult job(String name) {
+	@RequestMapping("/start")
+	public OperationResult start(String name) {
 		OperationResult result = new OperationResult();
 		result.setData(name);
 
@@ -26,7 +26,7 @@ public class HomeController {
 			@SuppressWarnings("unchecked")
 			Class<Job> jobClazz = (Class<Job>) clazz;
 
-			jobService.start(name, "group1", jobClazz);
+			jobService.start(name, "group1", "0/3 * * * * ?", jobClazz);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			result.setErrorMessage("Class not found!");
@@ -36,5 +36,15 @@ public class HomeController {
 		}
 
 		return result;
+	}
+
+	@RequestMapping("/interrupt")
+	public OperationResult interrupt(String name) {
+		return jobService.interrupt("group1", name);
+	}
+
+	@RequestMapping("/pause")
+	public OperationResult pause(String name) {
+		return jobService.pause("group1", name);
 	}
 }

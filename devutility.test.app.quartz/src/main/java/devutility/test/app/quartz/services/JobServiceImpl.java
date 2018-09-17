@@ -10,6 +10,7 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
+import org.quartz.UnableToInterruptJobException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +22,52 @@ public class JobServiceImpl implements JobService {
 	private Scheduler schedulerFactory1;
 
 	@Autowired
-	private Scheduler schedulerFactory2;
+	private Scheduler scheduler;
 
 	@Override
-	public void start(String name, String group, Class<? extends Job> clazz) throws SchedulerException {
+	public void start(String name, String group, String cronExpression, Class<? extends Job> clazz) throws SchedulerException {
 		JobDetail jobDetail = JobBuilder.newJob(clazz).withIdentity(name, group).build();
 
 		String triggerName = String.format("trigger_%s", name);
-		CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0/3 * * * * ?");
+		CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
 		CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerName, group).withSchedule(scheduleBuilder).build();
-		schedulerFactory2.scheduleJob(jobDetail, trigger);
+		scheduler.scheduleJob(jobDetail, trigger);
+
+		if (!scheduler.isStarted()) {
+			scheduler.start();
+		}
+	}
+
+	@Override
+	public OperationResult interrupt(String group, String name) {
+		OperationResult result = new OperationResult();
+		JobKey jobKey = JobKey.jobKey(name, group);
+
+		try {
+			if (!scheduler.interrupt(jobKey)) {
+				result.setErrorMessage(String.format("Interrupt Job with name = \"%s\" group = \"%s\" failed!", name, group));
+			}
+		} catch (UnableToInterruptJobException e) {
+			e.printStackTrace();
+			result.setErrorMessage(String.format("Interrupt Job with name = \"%s\" group = \"%s\" failed, system error!", name, group));
+		}
+
+		return result;
+	}
+
+	@Override
+	public OperationResult pause(String group, String name) {
+		OperationResult result = new OperationResult();
+		JobKey jobKey = JobKey.jobKey(name, group);
+
+		try {
+			scheduler.pauseJob(jobKey);
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+			result.setErrorMessage(String.format("Pause Job with name = \"%s\" group = \"%s\" failed, system error!", name, group));
+		}
+
+		return result;
 	}
 
 	@Override

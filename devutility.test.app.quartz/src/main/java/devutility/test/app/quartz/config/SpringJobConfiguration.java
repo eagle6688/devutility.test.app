@@ -61,13 +61,7 @@ public class SpringJobConfiguration {
 		SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
 		schedulerFactoryBean.setStartupDelay(2);
 		schedulerFactoryBean.setTriggers(cronTriggerFactory1, cronTriggerFactory2);
-		return schedulerFactoryBean;
-	}
-
-	@Bean
-	public SchedulerFactoryBean schedulerFactory2() {
-		SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
-		schedulerFactoryBean.setStartupDelay(2);
+		schedulerFactoryBean.setAutoStartup(false);
 		return schedulerFactoryBean;
 	}
 }
