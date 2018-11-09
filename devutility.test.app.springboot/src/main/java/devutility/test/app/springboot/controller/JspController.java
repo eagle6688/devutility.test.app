@@ -22,6 +22,7 @@ public class JspController extends BaseController {
 	@RequestMapping("/home")
 	public String home(Model model) {
 		model.addAttribute("SessionId", request.getSession().getId());
+		System.out.println(request.getSession().getId());
 		return "index";
 	}
 }
