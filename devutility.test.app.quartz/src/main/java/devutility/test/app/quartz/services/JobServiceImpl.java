@@ -3,18 +3,16 @@ package devutility.test.app.quartz.services;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.Job;
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
-import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 import org.quartz.UnableToInterruptJobException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import devutility.internal.models.OperationResult;
+import devutility.test.app.quartz.common.QuartzUtils;
 
 @Service
 public class JobServiceImpl implements JobService {
@@ -26,16 +24,7 @@ public class JobServiceImpl implements JobService {
 
 	@Override
 	public void start(String name, String group, String cronExpression, Class<? extends Job> clazz) throws SchedulerException {
-		JobDetail jobDetail = JobBuilder.newJob(clazz).withIdentity(name, group).build();
-
-		String triggerName = String.format("trigger_%s", name);
-		CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
-		CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerName, group).withSchedule(scheduleBuilder).build();
-		scheduler.scheduleJob(jobDetail, trigger);
-
-		if (!scheduler.isStarted()) {
-			scheduler.start();
-		}
+		QuartzUtils.start(scheduler, name, group, cronExpression, clazz);
 	}
 
 	@Override
