@@ -10,7 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
-import devutility.internal.lang.StringHelper;
+import devutility.internal.lang.StringUtils;
 import devutility.internal.text.format.DateFormatUtils;
 
 public class DateJsonDeserializer extends JsonDeserializer<Date> {
@@ -19,7 +19,7 @@ public class DateJsonDeserializer extends JsonDeserializer<Date> {
 		SimpleDateFormat simpleDateFormat = DateFormatUtils.getSimpleDateFormat(DateFormatUtils.STANDARDDATEFORMAT);
 		String text = jsonParser.getText();
 
-		if (StringHelper.isNullOrEmpty(text)) {
+		if (StringUtils.isNullOrEmpty(text)) {
 			return null;
 		}
 

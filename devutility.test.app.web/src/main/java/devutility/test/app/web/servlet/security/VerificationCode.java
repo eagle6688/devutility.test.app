@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import devutility.internal.base.Convertor;
-import devutility.internal.security.VerificationCodeHelper;
+import devutility.internal.data.converter.ConverterUtils;
+import devutility.internal.security.VerificationCodeUtils;
 
 /**
  * Servlet implementation class VerificationCode
@@ -31,10 +31,10 @@ public class VerificationCode extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int digit = Convertor.stringToInt(request.getParameter("d"));
-		int width = Convertor.stringToInt(request.getParameter("w"));
-		int height = Convertor.stringToInt(request.getParameter("h"));
-		BufferedImage bufferedImage = VerificationCodeHelper.create(width, height, digit, 16);
+		int digit = ConverterUtils.stringToInt(request.getParameter("d"));
+		int width = ConverterUtils.stringToInt(request.getParameter("w"));
+		int height = ConverterUtils.stringToInt(request.getParameter("h"));
+		BufferedImage bufferedImage = VerificationCodeUtils.create(width, height, digit, 16);
 		ServletOutputStream servletOutputStream = response.getOutputStream();
 		ImageIO.write(bufferedImage, "jpg", servletOutputStream);
 		servletOutputStream.flush();

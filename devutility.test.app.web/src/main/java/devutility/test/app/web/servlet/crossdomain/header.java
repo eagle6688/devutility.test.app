@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import devutility.internal.io.DirectoryUtils;
-import devutility.internal.io.TextFileHelper;
+import devutility.internal.io.TextFileUtils;
 import devutility.test.app.web.config.TemplateConfig;
 import devutility.test.app.web.models.crossdomain.HtmlJsonp;
 
@@ -37,10 +37,10 @@ public class header extends HttpServlet {
 		String html_HeaderPath = DirectoryUtils.toAbsolutePath(TemplateConfig.Html_Header);
 
 		HtmlJsonp htmlJsonp = new HtmlJsonp();
-		htmlJsonp.setHtml(TextFileHelper.read(html_HeaderPath, Charset.forName("utf-8")));
+		htmlJsonp.setHtml(TextFileUtils.read(html_HeaderPath, Charset.forName("utf-8")));
 
 		String jsInvoker_HeaderPath = DirectoryUtils.toAbsolutePath(TemplateConfig.JsInvoker_Header);
-		String invokerjs = TextFileHelper.read(jsInvoker_HeaderPath, Charset.forName("utf-8"));
+		String invokerjs = TextFileUtils.read(jsInvoker_HeaderPath, Charset.forName("utf-8"));
 
 		StringBuffer stringBuffer = new StringBuffer(";");
 		stringBuffer.append(invokerjs);

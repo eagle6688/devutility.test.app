@@ -62,7 +62,7 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public OperationResult delete(String jobName, String jobGroup) {
 		OperationResult result = new OperationResult();
-		result.append(String.format("Removing Quartz job: %s", jobName));
+		result.appendMessage(String.format("Removing Quartz job: %s", jobName));
 
 		try {
 			if (!schedulerFactory1.deleteJob(JobKey.jobKey(jobName, jobGroup))) {
@@ -85,7 +85,7 @@ public class JobServiceImpl implements JobService {
 
 		try {
 			schedulerFactory1.rescheduleJob(triggerKey, newTrigger);
-			result.append(String.format("Update cron trigger %s succeeded!", triggerKey.getName()));
+			result.appendMessage(String.format("Update cron trigger %s succeeded!", triggerKey.getName()));
 		} catch (SchedulerException e) {
 			e.printStackTrace();
 			result.setErrorMessage(String.format("Update cron trigger %s failed!", triggerKey.getName()));

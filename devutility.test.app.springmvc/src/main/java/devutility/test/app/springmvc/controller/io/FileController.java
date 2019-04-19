@@ -59,10 +59,10 @@ public class FileController {
 
 		try {
 			request.getParts().forEach(i -> {
-				result.append(i.getName());
-				result.append(": ");
-				result.append(i.getSubmittedFileName());
-				result.append("; ");
+				result.appendMessage(i.getName());
+				result.appendMessage(": ");
+				result.appendMessage(i.getSubmittedFileName());
+				result.appendMessage("; ");
 
 				if (i.getSubmittedFileName() != null) {
 					String filePath = Paths.get(uploadDirectory.toString(), i.getSubmittedFileName()).toString();

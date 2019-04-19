@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import com.devutility.test.model.Person;
+import devutility.internal.test.data.model.Person;
 
 @Configuration
 @PropertySource("classpath:test.properties")

@@ -23,12 +23,12 @@ public class CookieController {
 		Cookie[] cookies = request.getCookies();
 
 		if (cookies == null) {
-			result.appendError("no cookie!");
+			result.appendErrorMessage("no cookie!");
 			return result;
 		}
 
 		for (Cookie cookie : cookies) {
-			result.append(String.format("name: %s, value: %s", cookie.getName(), cookie.getValue()));
+			result.appendMessage(String.format("name: %s, value: %s", cookie.getName(), cookie.getValue()));
 		}
 
 		return result;
