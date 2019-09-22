@@ -1,8 +1,8 @@
-package devutility.test.app.springboot.services.impls;
+package devutility.test.app.springboot.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import devutility.test.app.springboot.services.interfaces.HelloWorldService;
+import devutility.test.app.springboot.service.HelloWorldService;
 
 @Service
 public class HelloWorldServiceImpl implements HelloWorldService {

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import devutility.internal.io.DirectoryUtils;
 import devutility.internal.util.PropertiesUtils;
-import devutility.test.app.springboot.models.Tester;
+import devutility.test.app.springboot.model.Tester;
 
 @RestController
 @RequestMapping("/test")
