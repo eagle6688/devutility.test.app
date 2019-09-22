@@ -3,8 +3,8 @@ package devutility.test.app.springboot.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import devutility.external.redis.models.SingleRedisInstance;
 import devutility.internal.models.OperationResult;
-import devutility.internal.util.RandomUtils;
 import devutility.test.app.springboot.service.RedisService;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -19,13 +19,18 @@ import redis.clients.jedis.JedisPool;
 @Service
 public class RedisServiceImpl implements RedisService {
 	@Autowired
+	private SingleRedisInstance singleRedisInstance;
+
+	@Autowired
 	private JedisPool jedisPool;
 
 	@Override
 	public OperationResult queueProducer(String key, int count) {
 		try (Jedis jedis = jedisPool.getResource()) {
+			jedis.select(singleRedisInstance.getDatabase());
+
 			for (int i = 0; i < count; i++) {
-				jedis.lpush(key, getMessage());
+				jedis.lpush(key, getMessage(i));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,7 +41,7 @@ public class RedisServiceImpl implements RedisService {
 		return result;
 	}
 
-	private String getMessage() {
-		return String.format("Hello Word! Index %d", RandomUtils.getNumber(1000000));
+	private String getMessage(int index) {
+		return String.format("Hello Word! Index %d", index);
 	}
 }
