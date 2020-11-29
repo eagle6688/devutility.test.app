@@ -31,6 +31,8 @@ public class LoginAspect {
 		HttpServletRequest request = servletRequestAttributes.getRequest();
 		log.info(request.getRequestURI());
 		log.info(request.getQueryString());
+		log.info(request.getRequestURL());
+		log.info(request.getRequestURL() + request.getQueryString());
 
 		String status = request.getParameter("status");
 
