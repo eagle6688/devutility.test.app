@@ -18,6 +18,19 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+		<!-- System -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- System end -->
+
 		<!-- Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
