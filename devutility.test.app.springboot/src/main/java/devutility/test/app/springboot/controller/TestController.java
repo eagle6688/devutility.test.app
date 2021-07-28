@@ -14,25 +14,38 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import devutility.internal.io.DirectoryUtils;
+import devutility.internal.models.OperationResult;
 import devutility.internal.util.PropertiesUtils;
 import devutility.test.app.springboot.model.Tester;
 
 @RestController
-@RequestMapping("/test")
-public class TestController {
+@RequestMapping("test")
+public class TestController extends BaseController {
+	@GetMapping("request")
+	public OperationResult request(int time) {
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		return new OperationResult();
+	}
+
 	@Autowired
 	private Tester tester;
 
-	@RequestMapping("/tester")
+	@GetMapping("tester")
 	public Tester tester() {
 		return tester;
 	}
 
-	@RequestMapping("/pro")
+	@GetMapping("pro")
 	public Map<String, Object> properties(String resource) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("resource", resource);

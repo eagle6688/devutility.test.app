@@ -8,13 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import devutility.internal.models.OperationResult;
 import devutility.test.app.springboot.service.RedisService;
 
-/**
- * 
- * RedisController
- * 
- * @author: Aldwin Su
- * @version: 2019-09-22 13:14:40
- */
 @RestController
 @RequestMapping("/redis")
 public class RedisController extends BaseController {

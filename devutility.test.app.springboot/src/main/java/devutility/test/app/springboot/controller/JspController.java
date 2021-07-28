@@ -5,9 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/jsp")
+@RequestMapping("jsp")
 public class JspController extends BaseController {
-	@RequestMapping("/index")
+	@RequestMapping("index")
 	public String index(Model model) {
 		try {
 			Thread.sleep(5000);
@@ -19,7 +19,7 @@ public class JspController extends BaseController {
 		return "index";
 	}
 
-	@RequestMapping("/home")
+	@RequestMapping("home")
 	public String home(Model model) {
 		model.addAttribute("SessionId", request.getSession().getId());
 		System.out.println(request.getSession().getId());
